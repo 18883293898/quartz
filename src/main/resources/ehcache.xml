@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false" monitoring="autodetect" dynamicConfig="true">
+    <!--
+    maxElementsInMemory：内存中最大缓存对象数
+    overflowToDisk：当overflowToDisk配置为true，当内存中Element数量达到maxElementsInMemory时，Ehcache将会Element写到磁盘中
+    eternal：Element是否永久有效，一但设置了， timeToIdleSeconds和 timeToLiveSeconds 将不起作用
+    timeToIdleSeconds: Element在缓存中空闲的最大时间。也就是说，这个时间控制的是一个Element 在一直没有被访问的前提下，这个对象可以在cache中的存活时间。若是0，表示永远存活
+    timeToLiveSeconds： 设置对象在cache中的最大存活时间，就是 无论对象被访问或是闲置,这个对象在cache中总的存活时间。
+        也就是说， timeToLiveSeconds的值得应该大于等于 timeToIdleSeconds， 若是0，表示永远存活。
+    memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内 存。默认策略是LRU（最近最少使用）。
+    你可以设置为FIFO（先进先出）或是LFU（较少使用）
+    maxElementsOnDisk：磁盘中最大缓存对象数，若是0表示无穷大。 该选项只有在overflowToDisk为true时有效
+    diskSpoolBufferSizeMB：这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区
+    -->
+
+    <diskStore path="java.io.tmpdir"/>
+    <defaultCache
+            maxElementsInMemory="10000000"
+            eternal="false"
+            timeToLiveSeconds="300"
+            timeToIdleSeconds="180"
+            overflowToDisk="false"
+            maxElementsOnDisk="10000000"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="30"
+            memoryStoreEvictionPolicy="LRU"
+    />
+</ehcache>
